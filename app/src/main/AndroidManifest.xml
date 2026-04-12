@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:allowBackup="true"
+        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+        android:label="doomsday"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher">
+
+        <!-- Splash launcher -->
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Main app screen -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+
+        <!-- Settings -->
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+
+        <!-- Live wallpaper service -->
+        <service
+            android:name=".DoomWallpaperService"
+            android:permission="android.permission.BIND_WALLPAPER"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.service.wallpaper"
+                android:resource="@xml/wallpaper" />
+        </service>
+
+    </application>
+
+</manifest>
