@@ -1,0 +1,56 @@
+# Gradle files
+.gradle/
+build/
+**/build/
+
+# Local configuration
+local.properties
+.idea/
+*.iml
+
+# Android Studio / Android IDE
+.cxx/
+.externalNativeBuild/
+captures/
+
+# Generated files
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# Logs
+*.log
+
+# OS generated
+.DS_Store
+Thumbs.db
+
+# Kotlin / Java
+*.class
+out/
+
+# Keystore / signing
+*.jks
+*.keystore
+*.pem
+
+# Google services (optional, if private)
+google-services.json
+
+# NDK
+obj/
+.libs/
+
+# Crashlytics / Firebase
+fabric.properties
+firebase-crashlytics.properties
+
+# Secrets / env
+.env
+.env.*
+
+# Temporary files
+*.tmp
+*.bak
+*.swp

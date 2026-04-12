@@ -38,32 +38,33 @@ public class MainActivity extends AppCompatActivity {
                 rootLayout.removeView(tutorialView);
             }
         } else {
-            tutorialView.setOnClickListener(v -> {
-                tutorialView.nextStep();
+            tutorialView.setOnClickListener(
+                    v -> {
+                        tutorialView.nextStep();
 
-                if (tutorialView.getVisibility() == View.GONE) {
-                    prefs.edit().putBoolean("first_launch", false).apply();
+                        if (tutorialView.getVisibility() == View.GONE) {
+                            prefs.edit().putBoolean("first_launch", false).apply();
 
-                    // ✅ completely remove overlay
-                    rootLayout.post(() -> rootLayout.removeView(tutorialView));
-                }
-            });
+                            // completely remove overlay
+                            rootLayout.post(() -> rootLayout.removeView(tutorialView));
+                        }
+                    });
         }
 
-        settingsBtn.setOnClickListener(v ->
-                startActivity(new Intent(this, SettingsActivity.class)));
+        settingsBtn.setOnClickListener(
+                v -> startActivity(new Intent(this, SettingsActivity.class)));
 
-        previewView.setOnClickListener(v -> {
-            try {
-                Intent intent = new Intent(WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER);
-                intent.putExtra(
-                        WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
-                        new ComponentName(this, DoomWallpaperService.class)
-                );
-                startActivity(intent);
-            } catch (Exception e) {
-                Toast.makeText(this, "Wallpaper picker failed", Toast.LENGTH_SHORT).show();
-            }
-        });
+        previewView.setOnClickListener(
+                v -> {
+                    try {
+                        Intent intent = new Intent(WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER);
+                        intent.putExtra(
+                                WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
+                                new ComponentName(this, DoomWallpaperService.class));
+                        startActivity(intent);
+                    } catch (Exception e) {
+                        Toast.makeText(this, "Wallpaper picker failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }
