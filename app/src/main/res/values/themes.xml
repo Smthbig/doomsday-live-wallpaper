@@ -3,7 +3,9 @@
     <!-- ========================= -->
     <!-- BASE THEME -->
     <!-- ========================= -->
-    <style name="Base.AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+    <style
+            name="Base.AppTheme"
+            parent="Theme.Material3.DayNight.NoActionBar">
 
         <!-- Shapes -->
         <item name="shapeAppearanceSmallComponent">@style/Shape.Small</item>
@@ -23,7 +25,9 @@
     <!-- ========================= -->
     <!-- LIGHT THEME -->
     <!-- ========================= -->
-    <style name="Theme.App.Light" parent="Base.AppTheme">
+    <style
+            name="Theme.App.Light"
+            parent="Base.AppTheme">
 
         <!-- Primary -->
         <item name="colorPrimary">@color/primary</item>
@@ -44,7 +48,7 @@
         <item name="colorOnTertiaryContainer">@color/onTertiaryContainer</item>
 
         <!-- Background -->
-        <item name="colorBackground">@color/background</item>
+        <item name="android:colorBackground">@color/background</item>
         <item name="colorOnBackground">@color/onBackground</item>
 
         <!-- Surface -->
@@ -67,12 +71,12 @@
     </style>
 
 
-    
-
     <!-- ========================= -->
     <!-- GLASSY THEME -->
     <!-- ========================= -->
-    <style name="Theme.App.Glassy" parent="Base.AppTheme">
+    <style
+            name="Theme.App.Glassy"
+            parent="Base.AppTheme">
 
         <!-- Transparent base -->
         <item name="android:windowBackground">@color/transparent</item>
@@ -96,15 +100,21 @@
     <!-- ========================= -->
     <!-- SHAPES -->
     <!-- ========================= -->
-    <style name="Shape.Small" parent="ShapeAppearance.Material3.SmallComponent">
+    <style
+            name="Shape.Small"
+            parent="ShapeAppearance.Material3.SmallComponent">
         <item name="cornerSize">10dp</item>
     </style>
 
-    <style name="Shape.Medium" parent="ShapeAppearance.Material3.MediumComponent">
+    <style
+            name="Shape.Medium"
+            parent="ShapeAppearance.Material3.MediumComponent">
         <item name="cornerSize">16dp</item>
     </style>
 
-    <style name="Shape.Large" parent="ShapeAppearance.Material3.LargeComponent">
+    <style
+            name="Shape.Large"
+            parent="ShapeAppearance.Material3.LargeComponent">
         <item name="cornerSize">24dp</item>
     </style>
 

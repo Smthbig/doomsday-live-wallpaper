@@ -43,7 +43,7 @@
         <item name="colorOnTertiaryContainer">@color/onTertiaryContainer</item>
 
         <!-- Background -->
-        <item name="colorBackground">@color/background</item>
+        <item name="android:colorBackground">@color/background</item>
         <item name="colorOnBackground">@color/onBackground</item>
 
         <!-- Surface -->
