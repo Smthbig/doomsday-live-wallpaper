@@ -36,11 +36,16 @@ Features
 - Premium Studio settings panel for advanced customization
 - Lock screen optimized design and smooth canvas drawing
 
-Screenshots
------------
-![Screenshot - Year Mode](assets/screenshots/screenshot-year.png)
-![Screenshot - Goal Mode](assets/screenshots/screenshot-goal.png)
-![Screenshot - Studio (Settings)](assets/screenshots/screenshot-studio.png)
+## 📸 Screenshots
+
+### 🗓 Year Mode
+![Year Mode](assets/screenshots/screenshot-year.png)
+
+### 🎯 Goal Mode
+![Goal Mode](assets/screenshots/screenshot-goal.png)
+
+### 🎛 Studio (Customization Panel)
+![Studio](assets/screenshots/screenshot-studio.png)
 
 Download
 --------
