@@ -12,6 +12,7 @@ jobs:
 
     env:
       CI: true
+      APP_NAME: doomsday
 
     steps:
 
@@ -30,6 +31,9 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
+      # -------------------------------
+      # KEYSTORE SETUP
+      # -------------------------------
       - name: Validate secret
         run: |
           if [ -z "${{ secrets.KEYSTORE_BASE64 }}" ]; then
@@ -40,9 +44,6 @@ jobs:
       - name: Decode Keystore
         run: |
           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > keystore.jks
-
-          ls -lh keystore.jks
-          file keystore.jks
 
           if [ ! -s keystore.jks ]; then
             echo "ERROR: keystore is empty or corrupted"
@@ -60,22 +61,41 @@ jobs:
           echo "KEY_ALIAS=${{ secrets.KEY_ALIAS }}" >> $GITHUB_ENV
           echo "KEY_PASSWORD=${{ secrets.KEY_PASSWORD }}" >> $GITHUB_ENV
 
-      - name: Extract version
+      # -------------------------------
+      # VERSION EXTRACTION
+      # -------------------------------
+      - name: Extract version from Gradle
         id: version
         run: |
-          VERSION_NAME=$(grep VERSION_NAME gradle.properties | cut -d'=' -f2 | tr -d '\r')
-          echo "name=$VERSION_NAME" >> $GITHUB_OUTPUT
+          VERSION_NAME=$(./gradlew -q printVersionName)
+          VERSION_CODE=$(./gradlew -q printVersionCode)
 
-      - name: Check release
+          echo "name=$VERSION_NAME" >> $GITHUB_OUTPUT
+          echo "code=$VERSION_CODE" >> $GITHUB_OUTPUT
+
+      # -------------------------------
+      # VERSION VALIDATION
+      # -------------------------------
+      - name: Validate version format
+        run: |
+          VERSION=${{ steps.version.outputs.name }}
+
+          if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+(\.[0-9]+)?$ ]]; then
+            echo "Invalid version format"
+            exit 1
+          fi
+
+      # -------------------------------
+      # TAG CHECK
+      # -------------------------------
+      - name: Check if tag exists
         id: check
         run: |
-          if gh release view v${{ steps.version.outputs.name }} > /dev/null 2>&1; then
+          if git rev-parse "v${{ steps.version.outputs.name }}" >/dev/null 2>&1; then
             echo "exists=true" >> $GITHUB_OUTPUT
           else
             echo "exists=false" >> $GITHUB_OUTPUT
           fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Stop if exists
         if: steps.check.outputs.exists == 'true'
@@ -83,39 +103,61 @@ jobs:
           echo "Release already exists"
           exit 0
 
+      # -------------------------------
+      # BUILD
+      # -------------------------------
       - name: Build APK
         run: |
           chmod +x gradlew
           ./gradlew assembleRelease --no-daemon --stacktrace
 
-      # FIX 1: Consistent naming
+      # -------------------------------
+      # ARTIFACT
+      # -------------------------------
       - name: Rename APK
         run: |
-          mv app/build/outputs/apk/release/app-release.apk shadow-v${{ steps.version.outputs.name }}.apk
+          mv app/build/outputs/apk/release/app-release.apk \
+          ${{ env.APP_NAME }}-v${{ steps.version.outputs.name }}(${{ steps.version.outputs.code }}).apk
 
-      # FIX 2: Stable changelog generation
+      - name: Ensure APK exists
+        run: |
+          if [ ! -f "${{ env.APP_NAME }}-v${{ steps.version.outputs.name }}(${{ steps.version.outputs.code }}).apk" ]; then
+            echo "APK not found"
+            exit 1
+          fi
+
+      # -------------------------------
+      # CHANGELOG
+      # -------------------------------
       - name: Generate changelog
         id: changelog
         run: |
           LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+
           {
             echo "CHANGELOG<<EOF"
-            echo "## Changes"
+            echo "## ${{ env.APP_NAME }} v${{ steps.version.outputs.name }}"
+            echo ""
+
             if [ -z "$LAST_TAG" ]; then
               git log --pretty=format:"- %s"
             else
               git log ${LAST_TAG}..HEAD --pretty=format:"- %s"
             fi
+
             echo ""
             echo "EOF"
           } >> $GITHUB_OUTPUT
 
+      # -------------------------------
+      # RELEASE
+      # -------------------------------
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ steps.version.outputs.name }}
-          name: Shadow v${{ steps.version.outputs.name }}
+          name: ${{ env.APP_NAME }} v${{ steps.version.outputs.name }}
           body: ${{ steps.changelog.outputs.CHANGELOG }}
-          files: shadow-v${{ steps.version.outputs.name }}.apk
+          files: ${{ env.APP_NAME }}-v${{ steps.version.outputs.name }}(${{ steps.version.outputs.code }}).apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
