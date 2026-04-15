@@ -1,0 +1,55 @@
+Generated on: Wed Apr 15 11:27:14 IST 2026
+
+src/
+├── main
+│   ├── AndroidManifest.xml
+│   ├── java
+│   │   └── com
+│   │       └── devkrishna
+│   │           └── doomsday
+│   │               ├── DoomWallpaperService.java
+│   │               ├── DotPreviewView.java
+│   │               ├── MainActivity.java
+│   │               ├── SettingsActivity.java
+│   │               ├── SplashActivity.java
+│   │               ├── ThemeManager.java
+│   │               └── TutorialOverlayView.java
+│   └── res
+│       ├── drawable
+│       │   ├── ic_launcher_background.xml
+│       │   └── ic_launcher_round.webp
+│       ├── drawable-v24
+│       │   └── ic_launcher_foreground.xml
+│       ├── layout
+│       │   └── activity_main.xml
+│       ├── mipmap-anydpi-v26
+│       │   ├── ic_launcher.xml
+│       │   └── ic_launcher_round.xml
+│       ├── mipmap-hdpi
+│       │   ├── ic_launcher.webp
+│       │   └── ic_launcher_round.webp
+│       ├── mipmap-mdpi
+│       │   ├── ic_launcher.webp
+│       │   └── ic_launcher_round.webp
+│       ├── mipmap-xhdpi
+│       │   ├── ic_launcher.webp
+│       │   └── ic_launcher_round.webp
+│       ├── mipmap-xxhdpi
+│       │   ├── ic_launcher.webp
+│       │   └── ic_launcher_round.webp
+│       ├── mipmap-xxxhdpi
+│       │   ├── ic_launcher.webp
+│       │   └── ic_launcher_round.webp
+│       ├── values
+│       │   ├── colors.xml
+│       │   ├── strings.xml
+│       │   └── themes.xml
+│       ├── values-night
+│       │   ├── colors.xml
+│       │   └── themes.xml
+│       └── xml
+│           ├── backup_rules.xml
+│           ├── colors.xml
+│           ├── data_extraction_rules.xml
+│           └── wallpaper.xml
+└── tree-str.txt
