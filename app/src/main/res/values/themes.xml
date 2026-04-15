@@ -1,9 +1,111 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-  <!-- Base application theme. -->
-  <style name="Base.AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
-    <!-- Customize your theme here. -->
-    <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-  </style>
 
-  <style name="AppTheme" parent="Base.AppTheme" />
+    <!-- ========================= -->
+    <!-- BASE THEME -->
+    <!-- ========================= -->
+    <style name="Base.AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+
+        <!-- Shapes -->
+        <item name="shapeAppearanceSmallComponent">@style/Shape.Small</item>
+        <item name="shapeAppearanceMediumComponent">@style/Shape.Medium</item>
+        <item name="shapeAppearanceLargeComponent">@style/Shape.Large</item>
+
+        <!-- System bars -->
+        <item name="android:statusBarColor">?attr/colorSurface</item>
+        <item name="android:navigationBarColor">?attr/colorSurface</item>
+
+        <!-- Keep overlay -->
+        <item name="elevationOverlayEnabled">true</item>
+
+    </style>
+
+
+    <!-- ========================= -->
+    <!-- LIGHT THEME -->
+    <!-- ========================= -->
+    <style name="Theme.App.Light" parent="Base.AppTheme">
+
+        <!-- Primary -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/onPrimary</item>
+        <item name="colorPrimaryContainer">@color/primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/onPrimaryContainer</item>
+
+        <!-- Secondary -->
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/onSecondary</item>
+        <item name="colorSecondaryContainer">@color/secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/onSecondaryContainer</item>
+
+        <!-- Tertiary -->
+        <item name="colorTertiary">@color/tertiary</item>
+        <item name="colorOnTertiary">@color/onTertiary</item>
+        <item name="colorTertiaryContainer">@color/tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/onTertiaryContainer</item>
+
+        <!-- Background -->
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorOnBackground">@color/onBackground</item>
+
+        <!-- Surface -->
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorSurfaceVariant">@color/surfaceVariant</item>
+        <item name="colorOnSurface">@color/onSurface</item>
+        <item name="colorOnSurfaceVariant">@color/onSurfaceVariant</item>
+
+        <!-- Outline -->
+        <item name="colorOutline">@color/outline</item>
+        <item name="colorOutlineVariant">@color/outlineVariant</item>
+
+        <!-- Error -->
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/onError</item>
+
+        <!-- Floating -->
+        <item name="android:colorBackgroundFloating">@color/surface_3</item>
+
+    </style>
+
+
+    
+
+    <!-- ========================= -->
+    <!-- GLASSY THEME -->
+    <!-- ========================= -->
+    <style name="Theme.App.Glassy" parent="Base.AppTheme">
+
+        <!-- Transparent base -->
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="colorSurface">@color/transparent</item>
+
+        <!-- Glass overlay -->
+        <item name="colorSurfaceVariant">@color/glass_light</item>
+
+        <!-- Text -->
+        <item name="colorOnSurface">@color/onSurface</item>
+
+        <!-- Outline -->
+        <item name="colorOutline">@color/glass_border</item>
+
+        <!-- Disable overlay -->
+        <item name="elevationOverlayEnabled">false</item>
+
+    </style>
+
+
+    <!-- ========================= -->
+    <!-- SHAPES -->
+    <!-- ========================= -->
+    <style name="Shape.Small" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerSize">10dp</item>
+    </style>
+
+    <style name="Shape.Medium" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="Shape.Large" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerSize">24dp</item>
+    </style>
+
 </resources>

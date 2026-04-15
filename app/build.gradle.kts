@@ -2,9 +2,12 @@ import java.util.Properties
 import java.io.FileInputStream
 
 plugins {
-    id("com.android.application") version "8.11.0"
+    id("com.android.application") version "8.4.2"
 }
 
+// -------------------------------
+// LOAD KEYSTORE PROPERTIES
+// -------------------------------
 val keystorePropsFile = rootProject.file("release.properties")
 val keystoreProps = Properties()
 
@@ -15,7 +18,7 @@ if (keystorePropsFile.exists()) {
 }
 
 // -------------------------------
-// DETECT ENV (CI)
+// ENV SIGNING (CI)
 // -------------------------------
 val envKeystoreFile = System.getenv("KEYSTORE_FILE")
 val envStorePassword = System.getenv("KEYSTORE_PASSWORD")
@@ -32,9 +35,27 @@ val hasLocalSigning = keystorePropsFile.exists() &&
             keystoreProps[it] != null
         }
 
+// -------------------------------
+// ANDROID CONFIG
+// -------------------------------
 android {
+
     namespace = "com.devkrishna.doomsday"
-    compileSdk = 34
+
+    compileSdk = 35
+
+    defaultConfig {
+        applicationId = "com.devkrishna.doomsday"
+        minSdk = 28
+        targetSdk = 35
+
+        versionCode = 1
+        versionName = "1.0"
+
+        vectorDrawables {
+            useSupportLibrary = true
+        }
+    }
 
     lint {
         checkReleaseBuilds = false
@@ -45,7 +66,6 @@ android {
     // -------------------------------
     signingConfigs {
 
-        // CI signing (PRIORITY)
         if (hasEnvSigning) {
             create("release") {
                 storeFile = rootProject.file(envKeystoreFile!!)
@@ -53,9 +73,7 @@ android {
                 keyAlias = envKeyAlias
                 keyPassword = envKeyPassword
             }
-        }
-        // Local signing fallback
-        else if (hasLocalSigning) {
+        } else if (hasLocalSigning) {
             create("release") {
                 storeFile = rootProject.file(keystoreProps["storeFile"] as String)
                 storePassword = keystoreProps["storePassword"] as String
@@ -65,85 +83,74 @@ android {
         }
     }
 
-    defaultConfig {
-        applicationId = "com.devkrishna.doomsday"
-        minSdk = 28
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
-
-        vectorDrawables {
-            useSupportLibrary = true
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
+    // -------------------------------
+    // BUILD TYPES
+    // -------------------------------
     buildTypes {
+
         release {
+
             if (signingConfigs.names.contains("release")) {
                 signingConfig = signingConfigs.getByName("release")
             }
+
             isMinifyEnabled = true
+
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
+
+        debug {
+            isMinifyEnabled = false
+        }
     }
 
+    // -------------------------------
+    // JAVA CONFIG
+    // -------------------------------
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    // -------------------------------
+    // FEATURES
+    // -------------------------------
     buildFeatures {
         viewBinding = true
     }
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.10"
-    }
-
+    // -------------------------------
+    // PACKAGING FIXES
+    // -------------------------------
     packaging {
         resources {
-            excludes.add("/META-INF/{AL2.0,LGPL2.1}")
-            excludes.add("META-INF/kotlinx_coroutines_core.version")
 
-            pickFirsts.add("nonJvmMain/default/linkdata/package_androidx/0_androidx.knm")
-            pickFirsts.add("nonJvmMain/default/linkdata/root_package/0_.knm")
-            pickFirsts.add("nonJvmMain/default/linkdata/module")
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "META-INF/kotlinx_coroutines_core.version"
 
-            pickFirsts.add("nativeMain/default/linkdata/root_package/0_.knm")
-            pickFirsts.add("nativeMain/default/linkdata/module")
+            pickFirsts += "META-INF/kotlin-project-structure-metadata.json"
 
-            pickFirsts.add("commonMain/default/linkdata/root_package/0_.knm")
-            pickFirsts.add("commonMain/default/linkdata/module")
-            pickFirsts.add("commonMain/default/linkdata/package_androidx/0_androidx.knm")
+            // Kotlin metadata fixes
+            pickFirsts += "commonMain/default/linkdata/root_package/0_.knm"
+            pickFirsts += "commonMain/default/linkdata/module"
 
-            pickFirsts.add("META-INF/kotlin-project-structure-metadata.json")
+            pickFirsts += "nonJvmMain/default/linkdata/root_package/0_.knm"
+            pickFirsts += "nonJvmMain/default/linkdata/module"
 
-            merges.add("commonMain/default/manifest")
-            merges.add("nonJvmMain/default/manifest")
-            merges.add("nativeMain/default/manifest")
-        }
-    }
+            pickFirsts += "nativeMain/default/linkdata/root_package/0_.knm"
+            pickFirsts += "nativeMain/default/linkdata/module"
 
-    configurations.all {
-        resolutionStrategy {
-            force("org.jetbrains.kotlin:kotlin-stdlib:1.9.22")
-            force("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.22")
-            force("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.22")
-
-            force("androidx.collection:collection:1.4.2")
-            force("androidx.annotation:annotation:1.8.1")
-            force("androidx.core:core-ktx:1.8.0")
-            force("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
-            force("androidx.collection:collection-ktx:1.4.2")
+            pickFirsts += "nonJvmMain/default/linkdata/package_androidx/0_androidx.knm"
+            pickFirsts += "commonMain/default/linkdata/package_androidx/0_androidx.knm"
         }
     }
 }
 
 // -------------------------------
-// VERSION TASKS (FOR CI)
+// VERSION TASKS (CI)
 // -------------------------------
 tasks.register("printVersionName") {
     doLast {
@@ -157,16 +164,38 @@ tasks.register("printVersionCode") {
     }
 }
 
+// -------------------------------
+// JAVA WARNINGS
+// -------------------------------
 tasks.withType<JavaCompile> {
     options.compilerArgs.add("-Xlint:deprecation")
 }
 
+// -------------------------------
+// DEPENDENCIES
+// -------------------------------
 dependencies {
+
+    // Core AndroidX
+    implementation("androidx.core:core-ktx:1.13.1")
+    implementation("androidx.appcompat:appcompat:1.7.0")
+
+    // Material 3
+    implementation("com.google.android.material:material:1.11.0")
+
+    // Layout
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
+
+    // Lifecycle (stability)
+    implementation("androidx.lifecycle:lifecycle-runtime:2.7.0")
+
+    // Startup
     implementation("androidx.startup:startup-runtime:1.1.1")
+
+    // Animation
     implementation("androidx.interpolator:interpolator:1.0.0")
+
+    // QR
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
     implementation("com.google.zxing:core:3.5.3")
 }

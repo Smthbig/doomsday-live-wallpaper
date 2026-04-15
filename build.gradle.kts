@@ -1,10 +1,16 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
-    id("com.android.application") apply false version "8.11.0"
-    id("com.android.library") apply false version "8.11.0"
-    
+
+    // Android plugins (stable for Material 3)
+    id("com.android.application") version "8.4.2" apply false
+    id("com.android.library") version "8.4.2" apply false
+
+    // Kotlin plugin (required internally by AGP even if Java)
+    id("org.jetbrains.kotlin.android") version "1.9.22" apply false
 }
 
+// -------------------------------
+// CLEAN TASK
+// -------------------------------
 tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }

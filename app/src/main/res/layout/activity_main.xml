@@ -1,33 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000">
+    android:background="?attr/colorOnBackground">
 
-    <!-- Live preview -->
+    <!-- ========================= -->
+    <!-- DOT PREVIEW -->
+    <!-- ========================= -->
     <com.devkrishna.doomsday.DotPreviewView
         android:id="@+id/previewView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true"
-        android:focusable="true"/>
-<com.devkrishna.doomsday.TutorialOverlayView
-    android:id="@+id/tutorialView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clickable="true"/>
+        android:focusable="true" />
 
-    <!-- top-right settings -->
-    <ImageButton
-        android:id="@+id/settingsBtn"
-        android:layout_width="54dp"
-        android:layout_height="54dp"
+    <!-- ========================= -->
+    <!-- TUTORIAL OVERLAY -->
+    <!-- ========================= -->
+    <com.devkrishna.doomsday.TutorialOverlayView
+        android:id="@+id/tutorialView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true" />
+
+    <!-- ========================= -->
+    <!-- SETTINGS BUTTON -->
+    <!-- ========================= -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_gravity="top|end"
         android:layout_margin="20dp"
-        android:background="@android:drawable/btn_default"
-        android:src="@android:drawable/ic_menu_manage"
-        android:scaleType="center"
-        android:tint="#FFFFFF"/>
+        app:cardCornerRadius="28dp"
+        app:cardElevation="6dp"
+        app:cardBackgroundColor="?attr/colorSurfaceVariant"
+        app:strokeColor="?attr/colorOutline"
+        app:strokeWidth="1dp">
+
+        <ImageButton
+            android:id="@+id/settingsBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:src="@android:drawable/ic_menu_manage"
+            android:scaleType="center"
+            android:tint="?attr/colorOnSurface" />
+
+    </com.google.android.material.card.MaterialCardView>
 
 </FrameLayout>

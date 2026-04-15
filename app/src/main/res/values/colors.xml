@@ -1,4 +1,81 @@
 <resources>
-    <color name="black">#000000</color>
-    <color name="white">#FFFFFF</color>
+
+    <!-- ========================= -->
+    <!-- PRIMARY -->
+    <!-- ========================= -->
+    <color name="primary">#7C7CFF</color>
+    <color name="onPrimary">#FFFFFF</color>
+    <color name="primaryContainer">#E4E6FF</color>
+    <color name="onPrimaryContainer">#1A1B3A</color>
+
+    <!-- ========================= -->
+    <!-- SECONDARY -->
+    <!-- ========================= -->
+    <color name="secondary">#8E8EA0</color>
+    <color name="onSecondary">#FFFFFF</color>
+    <color name="secondaryContainer">#E5E5EA</color>
+    <color name="onSecondaryContainer">#2C2C2E</color>
+
+    <!-- ========================= -->
+    <!-- TERTIARY -->
+    <!-- ========================= -->
+    <color name="tertiary">#30D158</color>
+    <color name="onTertiary">#FFFFFF</color>
+    <color name="tertiaryContainer">#D1FADF</color>
+    <color name="onTertiaryContainer">#00391F</color>
+
+    <!-- ========================= -->
+    <!-- BACKGROUND -->
+    <!-- ========================= -->
+    <color name="background">#F2F2F7</color>
+    <color name="onBackground">#000000</color>
+
+    <!-- ========================= -->
+    <!-- SURFACE -->
+    <!-- ========================= -->
+    <color name="surface">#FFFFFF</color>
+    <color name="surfaceVariant">#F2F2F7</color>
+    <color name="onSurface">#1C1C1E</color>
+    <color name="onSurfaceVariant">#6E6E73</color>
+
+    <!-- Elevation surfaces -->
+    <color name="surface_1">#FFFFFF</color>
+    <color name="surface_2">#FAFAFA</color>
+    <color name="surface_3">#F5F5F7</color>
+    <color name="surface_4">#EFEFF4</color>
+    <color name="surface_5">#E5E5EA</color>
+
+    <!-- ========================= -->
+    <!-- OUTLINE -->
+    <!-- ========================= -->
+    <color name="outline">#D1D1D6</color>
+    <color name="outlineVariant">#E5E5EA</color>
+
+    <!-- ========================= -->
+    <!-- ERROR -->
+    <!-- ========================= -->
+    <color name="error">#FF3B30</color>
+    <color name="onError">#FFFFFF</color>
+
+    <!-- ========================= -->
+    <!-- EXTRA STATES -->
+    <!-- ========================= -->
+    <color name="success">#34C759</color>
+    <color name="onSuccess">#FFFFFF</color>
+
+    <color name="warning">#FF9500</color>
+    <color name="onWarning">#FFFFFF</color>
+
+    <!-- ========================= -->
+    <!-- GLASS -->
+    <!-- ========================= -->
+    <color name="glass_light">#80FFFFFF</color>
+    <color name="glass_border">#33FFFFFF</color>
+
+    <!-- ========================= -->
+    <!-- UTILS -->
+    <!-- ========================= -->
+    <color name="transparent">#00000000</color>
+    <color name="scrim">#66000000</color>
+
 </resources>

@@ -1,2 +1,68 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    <!-- ========================= -->
+    <!-- PRIMARY -->
+    <!-- ========================= -->
+    <color name="primary">#B3B5FF</color>
+    <color name="onPrimary">#1A1B3A</color>
+
+    <!-- ========================= -->
+    <!-- SECONDARY -->
+    <!-- ========================= -->
+    <color name="secondary">#8E8EA0</color>
+    <color name="onSecondary">#FFFFFF</color>
+
+    <!-- ========================= -->
+    <!-- TERTIARY -->
+    <!-- ========================= -->
+    <color name="tertiary">#34C759</color>
+    <color name="onTertiary">#00391F</color>
+    <color name="tertiaryContainer">#1B5E20</color>
+    <color name="onTertiaryContainer">#A5D6A7</color>
+
+    <!-- ========================= -->
+    <!-- BACKGROUND -->
+    <!-- ========================= -->
+    <color name="background">#000000</color>
+    <color name="onBackground">#FFFFFF</color>
+
+    <!-- ========================= -->
+    <!-- SURFACE -->
+    <!-- ========================= -->
+    <color name="surface">#1C1C1E</color>
+    <color name="surfaceVariant">#2C2C2E</color>
+    <color name="onSurface">#FFFFFF</color>
+    <color name="onSurfaceVariant">#AEAEB2</color>
+
+    <!-- Elevation surfaces -->
+    <color name="surface_1">#1C1C1E</color>
+    <color name="surface_2">#2C2C2E</color>
+    <color name="surface_3">#3A3A3C</color>
+    <color name="surface_4">#48484A</color>
+    <color name="surface_5">#636366</color>
+
+    <!-- ========================= -->
+    <!-- OUTLINE -->
+    <!-- ========================= -->
+    <color name="outline">#3A3A3C</color>
+    <color name="outlineVariant">#48484A</color>
+
+    <!-- ========================= -->
+    <!-- ERROR -->
+    <!-- ========================= -->
+    <color name="error">#FF453A</color>
+    <color name="onError">#000000</color>
+
+    <!-- ========================= -->
+    <!-- GLASS -->
+    <!-- ========================= -->
+    <color name="glass_light">#40FFFFFF</color>
+    <color name="glass_border">#22FFFFFF</color>
+
+    <!-- ========================= -->
+    <!-- UTILS -->
+    <!-- ========================= -->
+    <color name="transparent">#00000000</color>
+    <color name="scrim">#99000000</color>
+
+</resources>

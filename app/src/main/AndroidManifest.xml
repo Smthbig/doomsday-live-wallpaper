@@ -2,37 +2,55 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
+        android:name=".App"
         android:allowBackup="true"
-        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         android:label="doomsday"
         android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher">
+        android:roundIcon="@mipmap/ic_launcher"
+        android:theme="@style/Theme.App.Light">
 
-        <!-- Splash launcher -->
+        <!-- ========================= -->
+        <!-- SPLASH (Launcher) -->
+        <!-- ========================= -->
         <activity
             android:name=".SplashActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.App.Light">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
-        <!-- Main app screen -->
+
+        <!-- ========================= -->
+        <!-- MAIN -->
+        <!-- ========================= -->
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.App.Light" />
 
-        <!-- Settings -->
+
+        <!-- ========================= -->
+        <!-- SETTINGS -->
+        <!-- ========================= -->
         <activity
             android:name=".SettingsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.App.Light" />
 
-        <!-- Live wallpaper service -->
+
+        <!-- ========================= -->
+        <!-- WALLPAPER SERVICE -->
+        <!-- ========================= -->
         <service
             android:name=".DoomWallpaperService"
             android:permission="android.permission.BIND_WALLPAPER"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.service.wallpaper.WallpaperService" />
             </intent-filter>
@@ -40,6 +58,7 @@
             <meta-data
                 android:name="android.service.wallpaper"
                 android:resource="@xml/wallpaper" />
+
         </service>
 
     </application>
