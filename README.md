@@ -38,14 +38,11 @@ Features
 
 ## 📸 Screenshots
 
-### 🗓 Year Mode
-![Year Mode](assets/screenshots/screenshot-year.png)
-
-### 🎯 Goal Mode
-![Goal Mode](assets/screenshots/screenshot-goal.png)
-
-### 🎛 Studio (Customization Panel)
-![Studio](assets/screenshots/screenshot-studio.png)
+<p align="center">
+  <img src="assets/screenshots/screenshot-year.png" width="30%" />
+  <img src="assets/screenshots/screenshot-goal.png" width="30%" />
+  <img src="assets/screenshots/screenshot-studio.png" width="30%" />
+</p>
 
 Download
 --------
