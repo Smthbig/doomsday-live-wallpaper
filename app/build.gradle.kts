@@ -28,7 +28,7 @@ val hasValidSigningProps = keystorePropsFile.exists().also { exists ->
 
 android {
     namespace = "com.devkrishna.doomsday"
-    compileSdk = 33
+    compileSdk = 34
     
     // disable linter
     lint {
@@ -49,7 +49,7 @@ android {
     defaultConfig {
         applicationId = "com.devkrishna.doomsday"
         minSdk = 28
-        targetSdk = 33 
+        targetSdk = 34 
         versionCode = 1
         versionName = "1.0"
         
