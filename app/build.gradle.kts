@@ -48,7 +48,7 @@ android {
         // CI signing (PRIORITY)
         if (hasEnvSigning) {
             create("release") {
-                storeFile = file(envKeystoreFile!!)
+                storeFile = rootProject.file(envKeystoreFile!!)
                 storePassword = envStorePassword
                 keyAlias = envKeyAlias
                 keyPassword = envKeyPassword
