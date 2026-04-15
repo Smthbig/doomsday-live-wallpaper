@@ -16,11 +16,21 @@ jobs:
 
     steps:
 
+      # -------------------------------
+      # CHECKOUT
+      # -------------------------------
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
+      # CRITICAL FIX (must be early)
+      - name: Grant execute permission
+        run: chmod +x gradlew
+
+      # -------------------------------
+      # JAVA + ANDROID
+      # -------------------------------
       - name: Setup JDK 21
         uses: actions/setup-java@v4
         with:
@@ -46,11 +56,11 @@ jobs:
           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > keystore.jks
 
           if [ ! -s keystore.jks ]; then
-            echo "ERROR: keystore is empty or corrupted"
+            echo "ERROR: keystore invalid"
             exit 1
           fi
 
-      - name: Verify keystore integrity
+      - name: Verify keystore
         run: |
           keytool -list -keystore keystore.jks -storepass "${{ secrets.KEYSTORE_PASSWORD }}" > /dev/null
 
@@ -62,19 +72,24 @@ jobs:
           echo "KEY_PASSWORD=${{ secrets.KEY_PASSWORD }}" >> $GITHUB_ENV
 
       # -------------------------------
-      # VERSION EXTRACTION
+      # VERSION EXTRACTION (AUTHORITATIVE)
       # -------------------------------
-      - name: Extract version from Gradle
+      - name: Extract version
         id: version
         run: |
           VERSION_NAME=$(./gradlew -q printVersionName)
           VERSION_CODE=$(./gradlew -q printVersionCode)
 
+          if [ -z "$VERSION_NAME" ] || [ -z "$VERSION_CODE" ]; then
+            echo "Version extraction failed"
+            exit 1
+          fi
+
           echo "name=$VERSION_NAME" >> $GITHUB_OUTPUT
           echo "code=$VERSION_CODE" >> $GITHUB_OUTPUT
 
       # -------------------------------
-      # VERSION VALIDATION
+      # VALIDATION
       # -------------------------------
       - name: Validate version format
         run: |
@@ -85,9 +100,6 @@ jobs:
             exit 1
           fi
 
-      # -------------------------------
-      # TAG CHECK
-      # -------------------------------
       - name: Check if tag exists
         id: check
         run: |
@@ -97,7 +109,7 @@ jobs:
             echo "exists=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Stop if exists
+      - name: Stop if release exists
         if: steps.check.outputs.exists == 'true'
         run: |
           echo "Release already exists"
@@ -108,7 +120,6 @@ jobs:
       # -------------------------------
       - name: Build APK
         run: |
-          chmod +x gradlew
           ./gradlew assembleRelease --no-daemon --stacktrace
 
       # -------------------------------
@@ -119,10 +130,12 @@ jobs:
           mv app/build/outputs/apk/release/app-release.apk \
           ${{ env.APP_NAME }}-v${{ steps.version.outputs.name }}(${{ steps.version.outputs.code }}).apk
 
-      - name: Ensure APK exists
+      - name: Verify APK
         run: |
-          if [ ! -f "${{ env.APP_NAME }}-v${{ steps.version.outputs.name }}(${{ steps.version.outputs.code }}).apk" ]; then
-            echo "APK not found"
+          FILE="${{ env.APP_NAME }}-v${{ steps.version.outputs.name }}(${{ steps.version.outputs.code }}).apk"
+
+          if [ ! -f "$FILE" ]; then
+            echo "APK missing"
             exit 1
           fi
 
