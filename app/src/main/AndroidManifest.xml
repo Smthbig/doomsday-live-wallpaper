@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
-        android:name="com.devkrishna.doomsday.App"
+        android:name=".App"
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_rules"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,7 +12,7 @@
 
         <!-- SPLASH -->
         <activity
-            android:name="com.devkrishna.doomsday.ui.splash.SplashActivity"
+            android:name=".ui.splash.SplashActivity"
             android:exported="true"
             android:launchMode="singleTask">
 
@@ -26,17 +25,17 @@
 
         <!-- MAIN -->
         <activity
-            android:name="com.devkrishna.doomsday.ui.main.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="false" />
 
         <!-- SETTINGS -->
         <activity
-            android:name="com.devkrishna.doomsday.ui.settings.SettingsActivity"
+            android:name=".ui.settings.SettingsActivity"
             android:exported="false" />
 
         <!-- WALLPAPER -->
         <service
-            android:name="com.devkrishna.doomsday.wallpaper.DoomWallpaperService"
+            android:name=".wallpaper.DoomWallpaperService"
             android:permission="android.permission.BIND_WALLPAPER"
             android:exported="true">
 

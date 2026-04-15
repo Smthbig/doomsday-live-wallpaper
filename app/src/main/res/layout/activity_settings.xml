@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorBackground">
+    android:background="?attr/colorSurface">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,6 +10,7 @@
         android:orientation="vertical"
         android:padding="20dp">
 
+        <!-- TITLE -->
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
@@ -17,10 +18,11 @@
             android:text="STUDIO"
             android:textSize="26sp"
             android:textStyle="bold"
-            android:textColor="?attr/colorOnBackground"
+            android:textColor="?attr/colorOnSurface"
             android:gravity="center"
             android:paddingBottom="16dp"/>
 
+        <!-- THEME MODE -->
         <TextView
             android:text="Theme Mode"
             android:textColor="?attr/colorOnSurfaceVariant"/>
@@ -30,6 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <!-- FONT -->
         <TextView
             android:text="Font"
             android:textColor="?attr/colorOnSurfaceVariant"
@@ -40,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <!-- DATE STYLE -->
         <TextView
             android:text="Date Style"
             android:textColor="?attr/colorOnSurfaceVariant"
@@ -50,6 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <!-- FILLED COLOR -->
         <TextView
             android:text="Filled Color"
             android:textColor="?attr/colorOnSurfaceVariant"
@@ -61,6 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <!-- EMPTY COLOR -->
         <TextView
             android:text="Empty Color"
             android:textColor="?attr/colorOnSurfaceVariant"
@@ -72,6 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <!-- CURRENT COLOR -->
         <TextView
             android:text="Current Color"
             android:textColor="?attr/colorOnSurfaceVariant"
@@ -83,6 +90,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <!-- SAVE -->
         <Button
             android:id="@+id/saveBtn"
             android:layout_width="match_parent"
