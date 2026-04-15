@@ -1,16 +1,19 @@
 package com.devkrishna.doomsday.theme;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.util.TypedValue;
+
+import androidx.appcompat.app.AppCompatDelegate;
 
 public class ThemeManager {
 
     private static final String PREF_NAME = "doom_prefs";
 
     // =========================
-    // PREF (SAFE)
+    // PREF
     // =========================
     public static SharedPreferences prefs(Context c) {
         if (c == null) return null;
@@ -18,26 +21,36 @@ public class ThemeManager {
     }
 
     // =========================
-    // SAFE ATTR RESOLVER (FIXED)
+    // SAFE ATTR RESOLVER
     // =========================
     private static int resolveAttr(Context context, int attr) {
-        if (context == null) return Color.WHITE;
+        if (context == null) return Color.TRANSPARENT;
 
         TypedValue value = new TypedValue();
         boolean found = context.getTheme().resolveAttribute(attr, value, true);
 
-        if (!found) return Color.WHITE;
+        if (!found) return Color.TRANSPARENT;
 
         if (value.type >= TypedValue.TYPE_FIRST_COLOR_INT &&
                 value.type <= TypedValue.TYPE_LAST_COLOR_INT) {
             return value.data;
         }
 
-        try {
-            return context.getColor(value.resourceId);
-        } catch (Exception e) {
-            return Color.WHITE;
+        if (value.resourceId != 0) {
+            try {
+                return context.getResources().getColor(value.resourceId, context.getTheme());
+            } catch (Exception ignored) {}
         }
+
+        return Color.TRANSPARENT;
+    }
+
+    // =========================
+    // SAFE COLOR READ
+    // =========================
+    private static int safeColor(int color, int fallback) {
+        if (color == 0) return fallback;
+        return color;
     }
 
     // =========================
@@ -47,7 +60,7 @@ public class ThemeManager {
     public static int getFilledColor(Context c) {
         SharedPreferences p = prefs(c);
         if (p != null && p.contains("filled_color")) {
-            return p.getInt("filled_color", Color.WHITE);
+            return safeColor(p.getInt("filled_color", Color.WHITE), Color.WHITE);
         }
         return resolveAttr(c, com.google.android.material.R.attr.colorPrimary);
     }
@@ -55,7 +68,7 @@ public class ThemeManager {
     public static int getEmptyColor(Context c) {
         SharedPreferences p = prefs(c);
         if (p != null && p.contains("empty_color")) {
-            return p.getInt("empty_color", Color.GRAY);
+            return safeColor(p.getInt("empty_color", Color.GRAY), Color.GRAY);
         }
         return resolveAttr(c, com.google.android.material.R.attr.colorOutline);
     }
@@ -63,7 +76,7 @@ public class ThemeManager {
     public static int getCurrentColor(Context c) {
         SharedPreferences p = prefs(c);
         if (p != null && p.contains("current_color")) {
-            return p.getInt("current_color", Color.YELLOW);
+            return safeColor(p.getInt("current_color", Color.YELLOW), Color.YELLOW);
         }
         return resolveAttr(c, com.google.android.material.R.attr.colorTertiary);
     }
@@ -114,6 +127,23 @@ public class ThemeManager {
         SharedPreferences p = prefs(c);
         if (p != null) {
             p.edit().putString("theme_mode", mode).apply();
+        }
+    }
+
+    // =========================
+    // APPLY THEME
+    // =========================
+    public static void applyTheme(Activity activity) {
+        if (activity == null) return;
+
+        String mode = getThemeMode(activity);
+
+        if ("LIGHT".equals(mode)) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        } else if ("DARK".equals(mode)) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
         }
     }
 

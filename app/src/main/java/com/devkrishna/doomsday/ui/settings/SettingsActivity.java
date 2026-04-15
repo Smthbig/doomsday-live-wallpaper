@@ -19,8 +19,12 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ThemeManager.applyTheme(this);
         setContentView(R.layout.activity_settings);
 
+        // =========================
+        // VIEW BINDING + NULL SAFETY
+        // =========================
         Spinner themeMode = findViewById(R.id.themeModeSpinner);
         Spinner fontSpinner = findViewById(R.id.fontSpinner);
         Spinner dateSpinner = findViewById(R.id.dateSpinner);
@@ -30,6 +34,13 @@ public class SettingsActivity extends AppCompatActivity {
         LinearLayout currentRow = findViewById(R.id.currentColorRow);
 
         Button saveBtn = findViewById(R.id.saveBtn);
+
+        if (themeMode == null || fontSpinner == null || dateSpinner == null ||
+                filledRow == null || emptyRow == null || currentRow == null || saveBtn == null) {
+            Toast.makeText(this, "Layout error", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
 
         // =========================
         // SAFE DEFAULT VALUES
@@ -64,11 +75,13 @@ public class SettingsActivity extends AppCompatActivity {
         dateSpinner.setAdapter(dateAdapter);
 
         // =========================
-        // RESTORE SAVED VALUES
+        // RESTORE VALUES SAFELY
         // =========================
-        setSpinnerSelection(themeMode, ThemeManager.getThemeMode(this));
-        setSpinnerSelection(fontSpinner, ThemeManager.getFont(this));
-        setSpinnerSelection(dateSpinner, ThemeManager.getDateStyle(this));
+        try {
+            setSpinnerSelection(themeMode, ThemeManager.getThemeMode(this));
+            setSpinnerSelection(fontSpinner, ThemeManager.getFont(this));
+            setSpinnerSelection(dateSpinner, ThemeManager.getDateStyle(this));
+        } catch (Exception ignored) {}
 
         // =========================
         // COLOR PICKERS
@@ -91,8 +104,6 @@ public class SettingsActivity extends AppCompatActivity {
                 ThemeManager.setCurrentColor(this, currentColor);
 
                 Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
-
-                // Avoid recreate crash
                 finish();
 
             } catch (Exception e) {
@@ -101,13 +112,12 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
-    // =========================
-    // SPINNER SELECTION HELPER
-    // =========================
     private void setSpinnerSelection(Spinner spinner, String value) {
         if (value == null) return;
 
         ArrayAdapter adapter = (ArrayAdapter) spinner.getAdapter();
+        if (adapter == null) return;
+
         for (int i = 0; i < adapter.getCount(); i++) {
             if (value.equals(adapter.getItem(i))) {
                 spinner.setSelection(i);
@@ -116,9 +126,6 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
-    // =========================
-    // COLOR ROW BUILDER
-    // =========================
     private void setupColorRow(LinearLayout row, ColorPick listener) {
 
         int[] colors = {
@@ -133,6 +140,7 @@ public class SettingsActivity extends AppCompatActivity {
             GradientDrawable bg = new GradientDrawable();
             bg.setShape(GradientDrawable.OVAL);
             bg.setColor(c);
+
             dot.setBackground(bg);
 
             LinearLayout.LayoutParams lp =
@@ -143,7 +151,7 @@ public class SettingsActivity extends AppCompatActivity {
 
             dot.setOnClickListener(v -> {
                 listener.pick(c);
-                row.setTag(c); // store selected color
+                row.setTag(c);
             });
 
             row.addView(dot);

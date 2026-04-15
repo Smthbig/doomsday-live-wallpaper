@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorOnBackground">
+    android:background="?attr/colorBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,7 +10,6 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <!-- TITLE -->
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
@@ -22,7 +21,6 @@
             android:gravity="center"
             android:paddingBottom="16dp"/>
 
-        <!-- THEME MODE -->
         <TextView
             android:text="Theme Mode"
             android:textColor="?attr/colorOnSurfaceVariant"/>
@@ -32,7 +30,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <!-- FONT -->
         <TextView
             android:text="Font"
             android:textColor="?attr/colorOnSurfaceVariant"
@@ -43,7 +40,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <!-- DATE STYLE -->
         <TextView
             android:text="Date Style"
             android:textColor="?attr/colorOnSurfaceVariant"
@@ -54,7 +50,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <!-- COLORS -->
         <TextView
             android:text="Filled Color"
             android:textColor="?attr/colorOnSurfaceVariant"
@@ -88,7 +83,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <!-- SAVE -->
         <Button
             android:id="@+id/saveBtn"
             android:layout_width="match_parent"

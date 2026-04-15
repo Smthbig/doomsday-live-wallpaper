@@ -9,7 +9,7 @@
         android:label="doomsday"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher"
-        android:theme="@style/Base.AppTheme">
+        android:theme="@style/Theme.App">
 
         <!-- SPLASH -->
         <activity
