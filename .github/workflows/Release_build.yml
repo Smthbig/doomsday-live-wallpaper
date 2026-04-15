@@ -88,23 +88,27 @@ jobs:
           chmod +x gradlew
           ./gradlew assembleRelease --no-daemon --stacktrace
 
+      # FIX 1: Consistent naming
       - name: Rename APK
         run: |
-          mv app/build/outputs/apk/release/app-release.apk doomsday${{ steps.version.outputs.name }}.apk
+          mv app/build/outputs/apk/release/app-release.apk shadow-v${{ steps.version.outputs.name }}.apk
 
+      # FIX 2: Stable changelog generation
       - name: Generate changelog
         id: changelog
         run: |
           LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
-          echo "CHANGELOG<<EOF" >> $GITHUB_OUTPUT
-          echo "## Changes" >> $GITHUB_OUTPUT
-          if [ -z "$LAST_TAG" ]; then
-            git log --pretty=format:"- %s" >> $GITHUB_OUTPUT
-          else
-            git log ${LAST_TAG}..HEAD --pretty=format:"- %s" >> $GITHUB_OUTPUT
-          fi
-          echo "" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          {
+            echo "CHANGELOG<<EOF"
+            echo "## Changes"
+            if [ -z "$LAST_TAG" ]; then
+              git log --pretty=format:"- %s"
+            else
+              git log ${LAST_TAG}..HEAD --pretty=format:"- %s"
+            fi
+            echo ""
+            echo "EOF"
+          } >> $GITHUB_OUTPUT
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
