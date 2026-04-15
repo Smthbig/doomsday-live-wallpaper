@@ -24,7 +24,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      # CRITICAL FIX (must be early)
       - name: Grant execute permission
         run: chmod +x gradlew
 
@@ -72,7 +71,7 @@ jobs:
           echo "KEY_PASSWORD=${{ secrets.KEY_PASSWORD }}" >> $GITHUB_ENV
 
       # -------------------------------
-      # VERSION EXTRACTION (AUTHORITATIVE)
+      # VERSION EXTRACTION
       # -------------------------------
       - name: Extract version
         id: version
@@ -94,7 +93,6 @@ jobs:
       - name: Validate version format
         run: |
           VERSION=${{ steps.version.outputs.name }}
-
           if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+(\.[0-9]+)?$ ]]; then
             echo "Invalid version format"
             exit 1
@@ -123,18 +121,37 @@ jobs:
           ./gradlew assembleRelease --no-daemon --stacktrace
 
       # -------------------------------
-      # ARTIFACT
+      # FIND APK (ROBUST)
+      # -------------------------------
+      - name: Locate APK
+        id: apk
+        run: |
+          APK_PATH=$(find app/build/outputs/apk/release -name "*.apk" | head -n 1)
+
+          if [ -z "$APK_PATH" ]; then
+            echo "APK not found"
+            exit 1
+          fi
+
+          echo "path=$APK_PATH" >> $GITHUB_OUTPUT
+
+      # -------------------------------
+      # RENAME (SAFE NAMING)
       # -------------------------------
       - name: Rename APK
+        id: rename
         run: |
-          mv app/build/outputs/apk/release/app-release.apk \
-          ${{ env.APP_NAME }}-v${{ steps.version.outputs.name }}(${{ steps.version.outputs.code }}).apk
+          OUTPUT="${{ env.APP_NAME }}-v${{ steps.version.outputs.name }}-${{ steps.version.outputs.code }}.apk"
+          mv "${{ steps.apk.outputs.path }}" "$OUTPUT"
 
+          echo "file=$OUTPUT" >> $GITHUB_OUTPUT
+
+      # -------------------------------
+      # VERIFY
+      # -------------------------------
       - name: Verify APK
         run: |
-          FILE="${{ env.APP_NAME }}-v${{ steps.version.outputs.name }}(${{ steps.version.outputs.code }}).apk"
-
-          if [ ! -f "$FILE" ]; then
+          if [ ! -f "${{ steps.rename.outputs.file }}" ]; then
             echo "APK missing"
             exit 1
           fi
@@ -171,6 +188,6 @@ jobs:
           tag_name: v${{ steps.version.outputs.name }}
           name: ${{ env.APP_NAME }} v${{ steps.version.outputs.name }}
           body: ${{ steps.changelog.outputs.CHANGELOG }}
-          files: ${{ env.APP_NAME }}-v${{ steps.version.outputs.name }}(${{ steps.version.outputs.code }}).apk
+          files: ${{ steps.rename.outputs.file }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
