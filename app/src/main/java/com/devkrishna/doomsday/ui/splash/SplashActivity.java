@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.devkrishna.doomsday.R;
+import com.devkrishna.doomsday.theme.ThemeManager;
 import com.devkrishna.doomsday.ui.main.MainActivity;
 
 public class SplashActivity extends AppCompatActivity {

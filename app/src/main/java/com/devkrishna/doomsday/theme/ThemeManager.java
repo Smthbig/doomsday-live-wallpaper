@@ -24,25 +24,26 @@ public class ThemeManager {
     // SAFE ATTR RESOLVER
     // =========================
     private static int resolveAttr(Context context, int attr) {
-        if (context == null) return Color.TRANSPARENT;
+        if (context == null) return Color.BLACK;
 
         TypedValue value = new TypedValue();
         boolean found = context.getTheme().resolveAttribute(attr, value, true);
 
-        if (!found) return Color.TRANSPARENT;
+        if (!found) return Color.BLACK;
 
-        if (value.type >= TypedValue.TYPE_FIRST_COLOR_INT &&
-                value.type <= TypedValue.TYPE_LAST_COLOR_INT) {
+        if (value.type >= TypedValue.TYPE_FIRST_COLOR_INT
+                && value.type <= TypedValue.TYPE_LAST_COLOR_INT) {
             return value.data;
         }
 
         if (value.resourceId != 0) {
             try {
                 return context.getResources().getColor(value.resourceId, context.getTheme());
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         }
 
-        return Color.TRANSPARENT;
+        return Color.BLACK;
     }
 
     // =========================
@@ -62,7 +63,7 @@ public class ThemeManager {
         if (p != null && p.contains("filled_color")) {
             return safeColor(p.getInt("filled_color", Color.WHITE), Color.WHITE);
         }
-        return resolveAttr(c, com.google.android.material.R.attr.colorPrimary);
+        return resolveAttr(c, androidx.appcompat.R.attr.colorPrimary);
     }
 
     public static int getEmptyColor(Context c) {
@@ -174,11 +175,7 @@ public class ThemeManager {
     public static void clearCustomColors(Context c) {
         SharedPreferences p = prefs(c);
         if (p != null) {
-            p.edit()
-                    .remove("filled_color")
-                    .remove("empty_color")
-                    .remove("current_color")
-                    .apply();
+            p.edit().remove("filled_color").remove("empty_color").remove("current_color").apply();
         }
     }
 }

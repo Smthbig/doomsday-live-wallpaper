@@ -2,7 +2,7 @@ import java.util.Properties
 import java.io.FileInputStream
 
 plugins {
-    id("com.android.application") version "8.4.2"
+    id("com.android.application") version "8.11.0"
 }
 
 // -------------------------------
@@ -42,12 +42,12 @@ android {
 
     namespace = "com.devkrishna.doomsday"
 
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.devkrishna.doomsday"
         minSdk = 28
-        targetSdk = 35
+        targetSdk = 36
 
         versionCode = 1
         versionName = "1.3"
