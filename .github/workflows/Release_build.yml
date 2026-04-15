@@ -90,7 +90,7 @@ jobs:
 
       - name: Rename APK
         run: |
-          mv app/build/outputs/apk/release/app-release.apk shadow-v${{ steps.version.outputs.name }}.apk
+          mv app/build/outputs/apk/release/app-release.apk doomsday${{ steps.version.outputs.name }}.apk
 
       - name: Generate changelog
         id: changelog

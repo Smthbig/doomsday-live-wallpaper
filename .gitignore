@@ -36,6 +36,7 @@ out/
 *.jks
 *.keystore
 *.pem
+*.jks.base64
 
 # Google services (optional, if private)
 google-services.json
