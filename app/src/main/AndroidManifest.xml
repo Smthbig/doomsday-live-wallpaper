@@ -2,20 +2,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
-        android:name=".App"
+        android:name="com.devkrishna.doomsday.App"
         android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_rules"
+        android:dataExtractionRules="@xml/data_extraction_rules"
         android:label="doomsday"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher"
-        android:theme="@style/Theme.App.Light">
+        android:theme="@style/Base.AppTheme">
 
-        <!-- ========================= -->
-        <!-- SPLASH (Launcher) -->
-        <!-- ========================= -->
+        <!-- SPLASH -->
         <activity
-            android:name=".SplashActivity"
+            android:name="com.devkrishna.doomsday.ui.splash.SplashActivity"
             android:exported="true"
-            android:theme="@style/Theme.App.Light">
+            android:launchMode="singleTask">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,30 +24,19 @@
 
         </activity>
 
-
-        <!-- ========================= -->
         <!-- MAIN -->
-        <!-- ========================= -->
         <activity
-            android:name=".MainActivity"
-            android:exported="false"
-            android:theme="@style/Theme.App.Light" />
+            android:name="com.devkrishna.doomsday.ui.main.MainActivity"
+            android:exported="false" />
 
-
-        <!-- ========================= -->
         <!-- SETTINGS -->
-        <!-- ========================= -->
         <activity
-            android:name=".SettingsActivity"
-            android:exported="false"
-            android:theme="@style/Theme.App.Light" />
+            android:name="com.devkrishna.doomsday.ui.settings.SettingsActivity"
+            android:exported="false" />
 
-
-        <!-- ========================= -->
-        <!-- WALLPAPER SERVICE -->
-        <!-- ========================= -->
+        <!-- WALLPAPER -->
         <service
-            android:name=".DoomWallpaperService"
+            android:name="com.devkrishna.doomsday.wallpaper.DoomWallpaperService"
             android:permission="android.permission.BIND_WALLPAPER"
             android:exported="true">
 

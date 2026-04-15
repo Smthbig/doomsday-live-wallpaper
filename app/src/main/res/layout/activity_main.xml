@@ -9,7 +9,7 @@
     <!-- ========================= -->
     <!-- DOT PREVIEW -->
     <!-- ========================= -->
-    <com.devkrishna.doomsday.DotPreviewView
+    <com.devkrishna.doomsday.ui.main.DotPreviewView
         android:id="@+id/previewView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,7 +19,7 @@
     <!-- ========================= -->
     <!-- TUTORIAL OVERLAY -->
     <!-- ========================= -->
-    <com.devkrishna.doomsday.TutorialOverlayView
+    <com.devkrishna.doomsday.ui.main.TutorialOverlayView
         android:id="@+id/tutorialView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
