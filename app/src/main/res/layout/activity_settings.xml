@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorSurface">
@@ -20,75 +21,87 @@
             android:textStyle="bold"
             android:textColor="?attr/colorOnSurface"
             android:gravity="center"
-            android:paddingBottom="16dp"/>
+            android:paddingBottom="16dp" />
 
         <!-- THEME MODE -->
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Theme Mode"
-            android:textColor="?attr/colorOnSurfaceVariant"/>
+            android:textColor="?attr/colorOnSurfaceVariant" />
 
         <Spinner
             android:id="@+id/themeModeSpinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <!-- FONT -->
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Font"
             android:textColor="?attr/colorOnSurfaceVariant"
-            android:paddingTop="16dp"/>
+            android:paddingTop="16dp" />
 
         <Spinner
             android:id="@+id/fontSpinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <!-- DATE STYLE -->
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Date Style"
             android:textColor="?attr/colorOnSurfaceVariant"
-            android:paddingTop="16dp"/>
+            android:paddingTop="16dp" />
 
         <Spinner
             android:id="@+id/dateSpinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <!-- FILLED COLOR -->
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Filled Color"
             android:textColor="?attr/colorOnSurfaceVariant"
-            android:paddingTop="16dp"/>
+            android:paddingTop="16dp" />
 
         <LinearLayout
             android:id="@+id/filledColorRow"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
 
         <!-- EMPTY COLOR -->
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Empty Color"
             android:textColor="?attr/colorOnSurfaceVariant"
-            android:paddingTop="16dp"/>
+            android:paddingTop="16dp" />
 
         <LinearLayout
             android:id="@+id/emptyColorRow"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
 
         <!-- CURRENT COLOR -->
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Current Color"
             android:textColor="?attr/colorOnSurfaceVariant"
-            android:paddingTop="16dp"/>
+            android:paddingTop="16dp" />
 
         <LinearLayout
             android:id="@+id/currentColorRow"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
 
         <!-- SAVE -->
         <Button
@@ -96,7 +109,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="SAVE"
-            android:layout_marginTop="24dp"/>
+            android:layout_marginTop="24dp" />
+        <Button
+            android:id="@+id/wallpaperBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Wallpaper"
+            android:layout_marginTop="16dp" />
 
     </LinearLayout>
 </ScrollView>

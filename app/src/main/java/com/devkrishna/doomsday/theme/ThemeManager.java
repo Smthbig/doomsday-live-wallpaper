@@ -8,6 +8,8 @@ import android.util.TypedValue;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.google.android.material.R;
+
 public class ThemeManager {
 
     private static final String PREF_NAME = "doom_prefs";
@@ -23,13 +25,13 @@ public class ThemeManager {
     // =========================
     // SAFE ATTR RESOLVER
     // =========================
-    private static int resolveAttr(Context context, int attr) {
-        if (context == null) return Color.BLACK;
+    private static int resolveAttr(Context context, int attr, int fallback) {
+        if (context == null) return fallback;
 
         TypedValue value = new TypedValue();
         boolean found = context.getTheme().resolveAttribute(attr, value, true);
 
-        if (!found) return Color.BLACK;
+        if (!found) return fallback;
 
         if (value.type >= TypedValue.TYPE_FIRST_COLOR_INT
                 && value.type <= TypedValue.TYPE_LAST_COLOR_INT) {
@@ -43,47 +45,46 @@ public class ThemeManager {
             }
         }
 
-        return Color.BLACK;
+        return fallback;
     }
 
     // =========================
     // SAFE COLOR READ
     // =========================
     private static int safeColor(int color, int fallback) {
-        if (color == 0) return fallback;
-        return color;
+        return (color == 0) ? fallback : color;
     }
 
     // =========================
-    // COLORS
+    // COLORS (Material3 correct)
     // =========================
 
     public static int getFilledColor(Context c) {
         SharedPreferences p = prefs(c);
         if (p != null && p.contains("filled_color")) {
-            return safeColor(p.getInt("filled_color", Color.WHITE), Color.WHITE);
+            return safeColor(p.getInt("filled_color", 0), Color.WHITE);
         }
-        return resolveAttr(c, androidx.appcompat.R.attr.colorPrimary);
+        return resolveAttr(c, R.attr.colorPrimary, Color.WHITE);
     }
 
     public static int getEmptyColor(Context c) {
         SharedPreferences p = prefs(c);
         if (p != null && p.contains("empty_color")) {
-            return safeColor(p.getInt("empty_color", Color.GRAY), Color.GRAY);
+            return safeColor(p.getInt("empty_color", 0), Color.GRAY);
         }
-        return resolveAttr(c, com.google.android.material.R.attr.colorOutline);
+        return resolveAttr(c, R.attr.colorOutline, Color.GRAY);
     }
 
     public static int getCurrentColor(Context c) {
         SharedPreferences p = prefs(c);
         if (p != null && p.contains("current_color")) {
-            return safeColor(p.getInt("current_color", Color.YELLOW), Color.YELLOW);
+            return safeColor(p.getInt("current_color", 0), Color.YELLOW);
         }
-        return resolveAttr(c, com.google.android.material.R.attr.colorTertiary);
+        return resolveAttr(c, R.attr.colorTertiary, Color.YELLOW);
     }
 
     public static int getBackgroundColor(Context c) {
-        return resolveAttr(c, android.R.attr.colorBackground);
+        return resolveAttr(c, android.R.attr.colorBackground, Color.BLACK);
     }
 
     // =========================
@@ -98,6 +99,36 @@ public class ThemeManager {
         SharedPreferences p = prefs(c);
         if (p != null) {
             p.edit().putString("font_style", value).apply();
+        }
+    }
+
+    // =========================
+    // WALLPAPER (SINGLE SOURCE)
+    // =========================
+
+    public static void setWallpaper(Context c, String uriString) {
+        SharedPreferences p = prefs(c);
+        if (p != null) {
+            p.edit().putString("wallpaper_path", uriString).apply();
+        }
+    }
+
+    public static String getWallpaper(Context c) {
+        SharedPreferences p = prefs(c);
+        if (p == null) return null;
+
+        String path = p.getString("wallpaper_path", null);
+
+        // basic validation
+        if (path == null || path.trim().isEmpty()) return null;
+
+        return path;
+    }
+
+    public static void clearWallpaper(Context c) {
+        SharedPreferences p = prefs(c);
+        if (p != null) {
+            p.edit().remove("wallpaper_path").apply();
         }
     }
 
@@ -132,12 +163,12 @@ public class ThemeManager {
     }
 
     // =========================
-    // APPLY THEME
+    // APPLY THEME (Single Source)
     // =========================
-    public static void applyTheme(Activity activity) {
-        if (activity == null) return;
+    public static void applyTheme(Context context) {
+        if (context == null) return;
 
-        String mode = getThemeMode(activity);
+        String mode = getThemeMode(context);
 
         if ("LIGHT".equals(mode)) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);

@@ -15,9 +15,9 @@ public class App extends Application {
         super.onCreate();
 
         // =========================
-        // APPLY SAVED THEME MODE
+        // APPLY THEME MODE (Single Source)
         // =========================
-        applyThemeMode();
+        ThemeManager.applyTheme(this);
 
         // =========================
         // MATERIAL YOU (Dynamic Color)
@@ -27,25 +27,15 @@ public class App extends Application {
         }
     }
 
-    // =========================
-    // THEME MODE HANDLER
-    // =========================
     private void applyThemeMode() {
-
         String mode = ThemeManager.getThemeMode(this);
 
-        switch (mode) {
-            case "LIGHT":
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                break;
-
-            case "DARK":
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                break;
-
-            default:
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-                break;
+        if ("LIGHT".equals(mode)) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        } else if ("DARK".equals(mode)) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
         }
     }
 }

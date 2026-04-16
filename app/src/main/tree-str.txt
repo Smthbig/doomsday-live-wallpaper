@@ -1,0 +1,51 @@
+Generated on: Thu Apr 16 10:45:43 IST 2026
+
+main/
+├── AndroidManifest.xml
+├── java
+│   └── com
+│       └── devkrishna
+│           └── doomsday
+│               ├── App.java
+│               ├── core
+│               │   ├── model
+│               │   ├── storage
+│               │   └── utils
+│               ├── theme
+│               │   └── ThemeManager.java
+│               ├── ui
+│               │   ├── main
+│               │   │   ├── DotPreviewView.java
+│               │   │   ├── MainActivity.java
+│               │   │   └── TutorialOverlayView.java
+│               │   ├── settings
+│               │   │   └── SettingsActivity.java
+│               │   └── splash
+│               │       └── SplashActivity.java
+│               └── wallpaper
+│                   └── DoomWallpaperService.java
+├── res
+│   ├── drawable
+│   │   └── ic_launcher_background.xml
+│   ├── drawable-v24
+│   │   └── ic_launcher_foreground.xml
+│   ├── font
+│   ├── layout
+│   │   ├── activity_main.xml
+│   │   ├── activity_settings.xml
+│   │   ├── activity_splash.xml
+│   │   └── design
+│   │       └── activity_settings.xml
+│   ├── mipmap-anydpi-v26
+│   │   ├── ic_launcher.xml
+│   │   └── ic_launcher_round.xml
+│   ├── values
+│   │   ├── colors.xml
+│   │   ├── strings.xml
+│   │   └── themes.xml
+│   ├── values-night
+│   │   ├── colors.xml
+│   │   └── themes.xml
+│   └── xml
+│       └── wallpaper.xml
+└── tree-str.txt
