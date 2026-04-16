@@ -103,7 +103,7 @@ Planned by Krishna (DevKrishna):
 Developer
 ---------
 Made with passion by Krishna (DevKrishna)  
-GitHub: https://github.com/DevKrishna  
+GitHub: https://github.com/krishna-85
 Project: Doomsday Live Wallpaper
 
 Building from source
