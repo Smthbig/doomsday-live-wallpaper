@@ -15,18 +15,17 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
+        // APPLY THEME FIRST (correct order)
         ThemeManager.applyTheme(this);
 
-        // Apply theme before UI
-        setTheme(R.style.Theme_App);
-
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
         TextView logo = findViewById(R.id.logo);
 
         // =========================
-        // FADE ANIMATION
+        // ANIMATION
         // =========================
         AlphaAnimation fade = new AlphaAnimation(0.3f, 1f);
         fade.setDuration(1000);
@@ -39,9 +38,9 @@ public class SplashActivity extends AppCompatActivity {
         // NAVIGATION
         // =========================
         logo.postDelayed(() -> {
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(SplashActivity.this, MainActivity.class));
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             finish();
-        }, 1600);
+        }, 1400); // slightly tighter
     }
 }

@@ -3,12 +3,7 @@ package com.devkrishna.doomsday.theme;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.util.TypedValue;
-
-import androidx.appcompat.app.AppCompatDelegate;
-
-import com.google.android.material.R;
 
 public class ThemeManager {
 
@@ -23,68 +18,97 @@ public class ThemeManager {
     }
 
     // =========================
-    // SAFE ATTR RESOLVER
+    // THEME TYPE
     // =========================
-    private static int resolveAttr(Context context, int attr, int fallback) {
-        if (context == null) return fallback;
+    public static String getThemeType(Context c) {
+        SharedPreferences p = prefs(c);
+        return p != null ? p.getString("theme_type", "LIGHT") : "LIGHT";
+    }
 
+    public static void setThemeType(Context c, String type) {
+        SharedPreferences p = prefs(c);
+        if (p != null) {
+            p.edit().putString("theme_type", type).apply();
+        }
+    }
+
+    // =========================
+    // APPLY THEME
+    // =========================
+    public static void applyTheme(Activity activity) {
+
+        if (activity == null) return;
+
+        String type = getThemeType(activity);
+
+        switch (type) {
+            case "DARK":
+                activity.setTheme(com.devkrishna.doomsday.R.style.Theme_App_Dark);
+                break;
+
+            case "GLASSY_LIGHT":
+                activity.setTheme(com.devkrishna.doomsday.R.style.Theme_App_GlassyLight);
+                break;
+
+            case "GLASSY_DARK":
+                activity.setTheme(com.devkrishna.doomsday.R.style.Theme_App_GlassyDark);
+                break;
+
+            case "EXPERIMENTAL":
+                activity.setTheme(com.devkrishna.doomsday.R.style.Theme_App_Experimental);
+                break;
+
+            default:
+                activity.setTheme(com.devkrishna.doomsday.R.style.Theme_App_Light);
+                break;
+        }
+    }
+
+    // =========================
+    // COLOR RESOLUTION (CORE FIX)
+    // =========================
+    private static int resolveAttr(Context context, int attr) {
         TypedValue value = new TypedValue();
-        boolean found = context.getTheme().resolveAttribute(attr, value, true);
-
-        if (!found) return fallback;
-
-        if (value.type >= TypedValue.TYPE_FIRST_COLOR_INT
-                && value.type <= TypedValue.TYPE_LAST_COLOR_INT) {
-            return value.data;
-        }
-
-        if (value.resourceId != 0) {
-            try {
-                return context.getResources().getColor(value.resourceId, context.getTheme());
-            } catch (Exception ignored) {
-            }
-        }
-
-        return fallback;
+        context.getTheme().resolveAttribute(attr, value, true);
+        return value.data;
     }
 
     // =========================
-    // SAFE COLOR READ
+    // COLORS (FIXED)
     // =========================
-    private static int safeColor(int color, int fallback) {
-        return (color == 0) ? fallback : color;
-    }
 
-    // =========================
-    // COLORS (Material3 correct)
-    // =========================
+    public static int getBackgroundColor(Context c) {
+        return resolveAttr(c, android.R.attr.colorBackground);
+    }
 
     public static int getFilledColor(Context c) {
         SharedPreferences p = prefs(c);
+
         if (p != null && p.contains("filled_color")) {
-            return safeColor(p.getInt("filled_color", 0), Color.WHITE);
+            return p.getInt("filled_color", 0);
         }
-        return resolveAttr(c, R.attr.colorPrimary, Color.WHITE);
+
+        return resolveAttr(c, com.google.android.material.R.attr.colorOnSurface);
     }
 
     public static int getEmptyColor(Context c) {
         SharedPreferences p = prefs(c);
+
         if (p != null && p.contains("empty_color")) {
-            return safeColor(p.getInt("empty_color", 0), Color.GRAY);
+            return p.getInt("empty_color", 0);
         }
-        return resolveAttr(c, R.attr.colorOutline, Color.GRAY);
+
+        return resolveAttr(c, com.google.android.material.R.attr.colorOutline);
     }
 
     public static int getCurrentColor(Context c) {
         SharedPreferences p = prefs(c);
-        if (p != null && p.contains("current_color")) {
-            return safeColor(p.getInt("current_color", 0), Color.YELLOW);
-        }
-        return resolveAttr(c, R.attr.colorTertiary, Color.YELLOW);
-    }
 
-    public static int getBackgroundColor(Context c) {
-        return resolveAttr(c, android.R.attr.colorBackground, Color.BLACK);
+        if (p != null && p.contains("current_color")) {
+            return p.getInt("current_color", 0);
+        }
+
+        return resolveAttr(c, com.google.android.material.R.attr.colorPrimary);
     }
 
     // =========================
@@ -99,36 +123,6 @@ public class ThemeManager {
         SharedPreferences p = prefs(c);
         if (p != null) {
             p.edit().putString("font_style", value).apply();
-        }
-    }
-
-    // =========================
-    // WALLPAPER (SINGLE SOURCE)
-    // =========================
-
-    public static void setWallpaper(Context c, String uriString) {
-        SharedPreferences p = prefs(c);
-        if (p != null) {
-            p.edit().putString("wallpaper_path", uriString).apply();
-        }
-    }
-
-    public static String getWallpaper(Context c) {
-        SharedPreferences p = prefs(c);
-        if (p == null) return null;
-
-        String path = p.getString("wallpaper_path", null);
-
-        // basic validation
-        if (path == null || path.trim().isEmpty()) return null;
-
-        return path;
-    }
-
-    public static void clearWallpaper(Context c) {
-        SharedPreferences p = prefs(c);
-        if (p != null) {
-            p.edit().remove("wallpaper_path").apply();
         }
     }
 
@@ -148,34 +142,27 @@ public class ThemeManager {
     }
 
     // =========================
-    // THEME MODE
+    // WALLPAPER
     // =========================
-    public static String getThemeMode(Context c) {
-        SharedPreferences p = prefs(c);
-        return p != null ? p.getString("theme_mode", "SYSTEM") : "SYSTEM";
-    }
-
-    public static void setThemeMode(Context c, String mode) {
+    public static void setWallpaper(Context c, String uriString) {
         SharedPreferences p = prefs(c);
         if (p != null) {
-            p.edit().putString("theme_mode", mode).apply();
+            p.edit().putString("wallpaper_path", uriString).apply();
         }
     }
 
-    // =========================
-    // APPLY THEME (Single Source)
-    // =========================
-    public static void applyTheme(Context context) {
-        if (context == null) return;
+    public static String getWallpaper(Context c) {
+        SharedPreferences p = prefs(c);
+        if (p == null) return null;
 
-        String mode = getThemeMode(context);
+        String path = p.getString("wallpaper_path", null);
+        return (path == null || path.trim().isEmpty()) ? null : path;
+    }
 
-        if ("LIGHT".equals(mode)) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        } else if ("DARK".equals(mode)) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+    public static void clearWallpaper(Context c) {
+        SharedPreferences p = prefs(c);
+        if (p != null) {
+            p.edit().remove("wallpaper_path").apply();
         }
     }
 
@@ -206,7 +193,11 @@ public class ThemeManager {
     public static void clearCustomColors(Context c) {
         SharedPreferences p = prefs(c);
         if (p != null) {
-            p.edit().remove("filled_color").remove("empty_color").remove("current_color").apply();
+            p.edit()
+                    .remove("filled_color")
+                    .remove("empty_color")
+                    .remove("current_color")
+                    .apply();
         }
     }
 }

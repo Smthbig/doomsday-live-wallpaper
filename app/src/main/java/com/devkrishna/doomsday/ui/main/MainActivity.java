@@ -12,9 +12,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.devkrishna.doomsday.R;
+import com.devkrishna.doomsday.core.manager.GoalManager;
 import com.devkrishna.doomsday.theme.ThemeManager;
-import com.devkrishna.doomsday.ui.main.DotPreviewView;
-import com.devkrishna.doomsday.ui.main.TutorialOverlayView;
 import com.devkrishna.doomsday.ui.settings.SettingsActivity;
 import com.devkrishna.doomsday.wallpaper.DoomWallpaperService;
 
@@ -28,10 +27,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         ThemeManager.applyTheme(this);
         setContentView(R.layout.activity_main);
 
         initViews();
+
+        // CRITICAL: ensure first render is correct
+        refreshPipeline();
+
         setupTutorial();
         setupActions();
     }
@@ -47,14 +51,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // =========================
-    // THEME APPLY
+    // PIPELINE REFRESH (CENTRAL)
     // =========================
-    private void applyTheme() {
-        // future extensibility (glassy, etc.)
-        String mode = ThemeManager.getThemeMode(this);
+    private void refreshPipeline() {
 
-        // currently handled globally in App class
-        // keep hook here for per-activity overrides if needed
+        GoalManager.get(this).refresh();
+
+        if (previewView != null) {}
     }
 
     // =========================
@@ -88,11 +91,9 @@ public class MainActivity extends AppCompatActivity {
     // =========================
     private void setupActions() {
 
-        // Open settings
         settingsBtn.setOnClickListener(
                 v -> startActivity(new Intent(this, SettingsActivity.class)));
 
-        // Open wallpaper picker
         previewView.setOnClickListener(
                 v -> {
                     try {
@@ -108,15 +109,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // =========================
-    // LIFECYCLE (THEME REFRESH)
+    // LIFECYCLE
     // =========================
     @Override
     protected void onResume() {
         super.onResume();
 
-        if (previewView != null) {
-            previewView.refreshTheme();
-        }
+        refreshPipeline();
 
         if (tutorialView != null) {
             tutorialView.refreshTheme();

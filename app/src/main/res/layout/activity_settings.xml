@@ -1,121 +1,216 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface">
+    android:fillViewport="true"
+    android:background="?android:attr/colorBackground"
+    android:descendantFocusability="beforeDescendants">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="16dp">
 
         <!-- TITLE -->
         <TextView
-            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="STUDIO"
-            android:textSize="26sp"
+            android:text="Studio"
+            android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="?attr/colorOnSurface"
             android:gravity="center"
             android:paddingBottom="16dp" />
 
-        <!-- THEME MODE -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Theme Mode"
-            android:textColor="?attr/colorOnSurfaceVariant" />
-
-        <Spinner
-            android:id="@+id/themeModeSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <!-- FONT -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Font"
-            android:textColor="?attr/colorOnSurfaceVariant"
-            android:paddingTop="16dp" />
-
-        <Spinner
-            android:id="@+id/fontSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <!-- DATE STYLE -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Date Style"
-            android:textColor="?attr/colorOnSurfaceVariant"
-            android:paddingTop="16dp" />
-
-        <Spinner
-            android:id="@+id/dateSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <!-- FILLED COLOR -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Filled Color"
-            android:textColor="?attr/colorOnSurfaceVariant"
-            android:paddingTop="16dp" />
-
+        <!-- ========================= -->
+        <!-- GOAL -->
+        <!-- ========================= -->
         <LinearLayout
-            android:id="@+id/filledColorRow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" />
+            android:orientation="vertical"
+            android:background="?attr/colorSurfaceVariant"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp"
+            android:elevation="4dp">
 
-        <!-- EMPTY COLOR -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Empty Color"
-            android:textColor="?attr/colorOnSurfaceVariant"
-            android:paddingTop="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Goal"
+                android:textStyle="bold"
+                android:textColor="?attr/colorOnSurface" />
 
+            <EditText
+                android:id="@+id/goalInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter total days (e.g. 365)"
+                android:inputType="number"
+                android:textColor="?attr/colorOnSurface"
+                android:textColorHint="?attr/colorOnSurfaceVariant"
+                android:padding="10dp"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+
+        <!-- ========================= -->
+        <!-- APPEARANCE -->
+        <!-- ========================= -->
         <LinearLayout
-            android:id="@+id/emptyColorRow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" />
+            android:orientation="vertical"
+            android:background="?attr/colorSurfaceVariant"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp"
+            android:elevation="4dp">
 
-        <!-- CURRENT COLOR -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Current Color"
-            android:textColor="?attr/colorOnSurfaceVariant"
-            android:paddingTop="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Appearance"
+                android:textStyle="bold"
+                android:textColor="?attr/colorOnSurface" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Theme Mode"
+                android:paddingTop="12dp" />
+
+            <Spinner
+                android:id="@+id/themeModeSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Font"
+                android:paddingTop="12dp" />
+
+            <Spinner
+                android:id="@+id/fontSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date Style"
+                android:paddingTop="12dp" />
+
+            <Spinner
+                android:id="@+id/dateSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true" />
+
+        </LinearLayout>
+
+        <!-- ========================= -->
+        <!-- COLORS -->
+        <!-- ========================= -->
         <LinearLayout
-            android:id="@+id/currentColorRow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" />
+            android:orientation="vertical"
+            android:background="?attr/colorSurfaceVariant"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp"
+            android:elevation="4dp">
 
-        <!-- SAVE -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Colors"
+                android:textStyle="bold"
+                android:textColor="?attr/colorOnSurface" />
+
+            <!-- FILLED -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Filled"
+                android:paddingTop="12dp" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false">
+
+                <LinearLayout
+                    android:id="@+id/filledColorRow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+
+            <!-- EMPTY -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Empty"
+                android:paddingTop="12dp" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false">
+
+                <LinearLayout
+                    android:id="@+id/emptyColorRow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+
+            <!-- CURRENT -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Current"
+                android:paddingTop="12dp" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false">
+
+                <LinearLayout
+                    android:id="@+id/currentColorRow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+
+        </LinearLayout>
+
+        <!-- ========================= -->
+        <!-- ACTIONS -->
+        <!-- ========================= -->
         <Button
             android:id="@+id/saveBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="SAVE"
-            android:layout_marginTop="24dp" />
+            android:text="Done"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginTop="8dp" />
+
         <Button
             android:id="@+id/wallpaperBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Select Wallpaper"
-            android:layout_marginTop="16dp" />
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginTop="12dp" />
 
     </LinearLayout>
+
 </ScrollView>

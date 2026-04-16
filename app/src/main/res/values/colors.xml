@@ -1,81 +1,46 @@
 <resources>
 
     <!-- ========================= -->
-    <!-- PRIMARY -->
+    <!-- LIGHT BASE -->
     <!-- ========================= -->
-    <color name="primary">#7C7CFF</color>
-    <color name="onPrimary">#FFFFFF</color>
-    <color name="primaryContainer">#E4E6FF</color>
-    <color name="onPrimaryContainer">#1A1B3A</color>
+    <color name="bg_light">#FFFFFF</color>
+    <color name="surface_light">#FFFFFF</color>
+    <color name="surface_variant_light">#F5F5F5</color>
+
+    <color name="on_surface_light">#000000</color>
+    <color name="on_surface_variant_light">#444444</color>
+
+    <color name="primary_light">#6750A4</color>
+    <color name="outline_light">#DDDDDD</color>
 
     <!-- ========================= -->
-    <!-- SECONDARY -->
+    <!-- DARK BASE -->
     <!-- ========================= -->
-    <color name="secondary">#8E8EA0</color>
-    <color name="onSecondary">#FFFFFF</color>
-    <color name="secondaryContainer">#E5E5EA</color>
-    <color name="onSecondaryContainer">#2C2C2E</color>
+    <color name="bg_dark">#121212</color>
+    <color name="surface_dark">#121212</color>
+    <color name="surface_variant_dark">#1E1E1E</color>
+
+    <color name="on_surface_dark">#FFFFFF</color>
+    <color name="on_surface_variant_dark">#BBBBBB</color>
+
+    <color name="primary_dark">#BB86FC</color>
+    <color name="outline_dark">#333333</color>
 
     <!-- ========================= -->
-    <!-- TERTIARY -->
+    <!-- GLASSY -->
     <!-- ========================= -->
-    <color name="tertiary">#30D158</color>
-    <color name="onTertiary">#FFFFFF</color>
-    <color name="tertiaryContainer">#D1FADF</color>
-    <color name="onTertiaryContainer">#00391F</color>
+    <color name="glass_light_overlay">#CCFFFFFF</color>
+    <color name="glass_dark_overlay">#CC000000</color>
 
     <!-- ========================= -->
-    <!-- BACKGROUND -->
+    <!-- EXPERIMENTAL -->
     <!-- ========================= -->
-    <color name="background">#F2F2F7</color>
-    <color name="onBackground">#000000</color>
+    <color name="exp_bg">#0F172A</color>
+    <color name="exp_surface">#0F172A</color>
+    <color name="exp_surface_variant">#1E293B</color>
 
-    <!-- ========================= -->
-    <!-- SURFACE -->
-    <!-- ========================= -->
-    <color name="surface">#FFFFFF</color>
-    <color name="surfaceVariant">#F2F2F7</color>
-    <color name="onSurface">#1C1C1E</color>
-    <color name="onSurfaceVariant">#6E6E73</color>
-
-    <!-- Elevation surfaces -->
-    <color name="surface_1">#FFFFFF</color>
-    <color name="surface_2">#FAFAFA</color>
-    <color name="surface_3">#F5F5F7</color>
-    <color name="surface_4">#EFEFF4</color>
-    <color name="surface_5">#E5E5EA</color>
-
-    <!-- ========================= -->
-    <!-- OUTLINE -->
-    <!-- ========================= -->
-    <color name="outline">#D1D1D6</color>
-    <color name="outlineVariant">#E5E5EA</color>
-
-    <!-- ========================= -->
-    <!-- ERROR -->
-    <!-- ========================= -->
-    <color name="error">#FF3B30</color>
-    <color name="onError">#FFFFFF</color>
-
-    <!-- ========================= -->
-    <!-- EXTRA STATES -->
-    <!-- ========================= -->
-    <color name="success">#34C759</color>
-    <color name="onSuccess">#FFFFFF</color>
-
-    <color name="warning">#FF9500</color>
-    <color name="onWarning">#FFFFFF</color>
-
-    <!-- ========================= -->
-    <!-- GLASS -->
-    <!-- ========================= -->
-    <color name="glass_light">#80FFFFFF</color>
-    <color name="glass_border">#33FFFFFF</color>
-
-    <!-- ========================= -->
-    <!-- UTILS -->
-    <!-- ========================= -->
-    <color name="transparent">#00000000</color>
-    <color name="scrim">#66000000</color>
+    <color name="exp_on_surface">#E2E8F0</color>
+    <color name="exp_primary">#22C55E</color>
+    <color name="exp_outline">#334155</color>
 
 </resources>

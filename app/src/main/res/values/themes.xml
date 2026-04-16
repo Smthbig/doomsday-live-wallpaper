@@ -1,101 +1,140 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <!-- ========================= -->
-    <!-- BASE THEME -->
+    <!-- BASE -->
     <!-- ========================= -->
     <style
             name="Base.AppTheme"
-            parent="Theme.Material3.DayNight.NoActionBar">
+            parent="Theme.Material3.DayNight">
 
-        <!-- Shapes -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
         <item name="shapeAppearanceSmallComponent">@style/Shape.Small</item>
         <item name="shapeAppearanceMediumComponent">@style/Shape.Medium</item>
         <item name="shapeAppearanceLargeComponent">@style/Shape.Large</item>
 
-        <!-- System bars -->
         <item name="android:statusBarColor">?attr/colorSurface</item>
         <item name="android:navigationBarColor">?attr/colorSurface</item>
 
-        <!-- Keep overlay -->
-        <item name="elevationOverlayEnabled">true</item>
-
     </style>
 
-
     <!-- ========================= -->
-    <!-- LIGHT THEME -->
+    <!-- LIGHT -->
     <!-- ========================= -->
     <style
             name="Theme.App.Light"
             parent="Base.AppTheme">
 
-        <!-- Primary -->
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorOnPrimary">@color/onPrimary</item>
-        <item name="colorPrimaryContainer">@color/primaryContainer</item>
-        <item name="colorOnPrimaryContainer">@color/onPrimaryContainer</item>
+        <item name="android:colorBackground">@color/bg_light</item>
+        <item name="colorSurface">@color/surface_light</item>
+        <item name="colorSurfaceVariant">@color/surface_variant_light</item>
 
-        <!-- Secondary -->
-        <item name="colorSecondary">@color/secondary</item>
-        <item name="colorOnSecondary">@color/onSecondary</item>
-        <item name="colorSecondaryContainer">@color/secondaryContainer</item>
-        <item name="colorOnSecondaryContainer">@color/onSecondaryContainer</item>
+        <item name="colorOnSurface">@color/on_surface_light</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_variant_light</item>
 
-        <!-- Tertiary -->
-        <item name="colorTertiary">@color/tertiary</item>
-        <item name="colorOnTertiary">@color/onTertiary</item>
-        <item name="colorTertiaryContainer">@color/tertiaryContainer</item>
-        <item name="colorOnTertiaryContainer">@color/onTertiaryContainer</item>
-
-        <!-- Background -->
-        <item name="android:colorBackground">@color/background</item>
-        <item name="colorOnBackground">@color/onBackground</item>
-
-        <!-- Surface -->
-        <item name="colorSurface">@color/surface</item>
-        <item name="colorSurfaceVariant">@color/surfaceVariant</item>
-        <item name="colorOnSurface">@color/onSurface</item>
-        <item name="colorOnSurfaceVariant">@color/onSurfaceVariant</item>
-
-        <!-- Outline -->
-        <item name="colorOutline">@color/outline</item>
-        <item name="colorOutlineVariant">@color/outlineVariant</item>
-
-        <!-- Error -->
-        <item name="colorError">@color/error</item>
-        <item name="colorOnError">@color/onError</item>
-
-        <!-- Floating -->
-        <item name="android:colorBackgroundFloating">@color/surface_3</item>
+        <item name="colorPrimary">@color/primary_light</item>
+        <item name="colorOutline">@color/outline_light</item>
 
     </style>
 
-
     <!-- ========================= -->
-    <!-- GLASSY THEME -->
+    <!-- DARK -->
     <!-- ========================= -->
     <style
-            name="Theme.App.Glassy"
+            name="Theme.App.Dark"
             parent="Base.AppTheme">
 
-        <!-- Transparent base -->
-        <item name="android:windowBackground">@color/transparent</item>
-        <item name="colorSurface">@color/transparent</item>
+        <item name="android:colorBackground">@color/bg_dark</item>
+        <item name="colorSurface">@color/surface_dark</item>
+        <item name="colorSurfaceVariant">@color/surface_variant_dark</item>
 
-        <!-- Glass overlay -->
-        <item name="colorSurfaceVariant">@color/glass_light</item>
+        <item name="colorOnSurface">@color/on_surface_dark</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_variant_dark</item>
 
-        <!-- Text -->
-        <item name="colorOnSurface">@color/onSurface</item>
-
-        <!-- Outline -->
-        <item name="colorOutline">@color/glass_border</item>
-
-        <!-- Disable overlay -->
-        <item name="elevationOverlayEnabled">false</item>
+        <item name="colorPrimary">@color/primary_dark</item>
+        <item name="colorOutline">@color/outline_dark</item>
 
     </style>
 
+    <!-- ========================= -->
+    <!-- GLASSY LIGHT -->
+    <!-- ========================= -->
+    <style
+            name="Theme.App.GlassyLight"
+            parent="Base.AppTheme">
+
+        <item name="android:windowBackground">@android:color/transparent</item>
+
+        <item name="android:colorBackground">@color/bg_light</item>
+        <item name="colorSurface">@android:color/transparent</item>
+        <item name="colorSurfaceVariant">@color/glass_light_overlay</item>
+
+        <item name="colorOnSurface">@color/on_surface_light</item>
+        <item name="colorOutline">@color/glass_light_overlay</item>
+
+    </style>
+
+    <!-- ========================= -->
+    <!-- GLASSY DARK -->
+    <!-- ========================= -->
+    <style
+            name="Theme.App.GlassyDark"
+            parent="Base.AppTheme">
+
+        <item name="android:windowBackground">@android:color/transparent</item>
+
+        <item name="android:colorBackground">@color/bg_dark</item>
+        <item name="colorSurface">@android:color/transparent</item>
+        <item name="colorSurfaceVariant">@color/glass_dark_overlay</item>
+
+        <item name="colorOnSurface">@color/on_surface_dark</item>
+        <item name="colorOutline">@color/glass_dark_overlay</item>
+
+    </style>
+
+    <!-- ========================= -->
+    <!-- EXPERIMENTAL -->
+    <!-- ========================= -->
+    <style
+            name="Theme.App.Experimental"
+            parent="Base.AppTheme">
+
+        <item name="android:colorBackground">@color/exp_bg</item>
+        <item name="colorSurface">@color/exp_surface</item>
+        <item name="colorSurfaceVariant">@color/exp_surface_variant</item>
+
+        <item name="colorOnSurface">@color/exp_on_surface</item>
+        <item name="colorPrimary">@color/exp_primary</item>
+        <item name="colorOutline">@color/exp_outline</item>
+
+    </style>
+    <style name="SettingsCard">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">?attr/colorSurfaceVariant</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:elevation">4dp</item>
+    </style>
+
+    <style name="SettingsTitle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="SettingsLabel">
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+    </style>
+
+    <style name="SettingsInput">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:background">?attr/editTextBackground</item>
+    </style>
 
     <!-- ========================= -->
     <!-- SHAPES -->

@@ -1,4 +1,4 @@
-Generated on: Thu Apr 16 10:45:43 IST 2026
+Generated on: Thu Apr 16 13:54:51 IST 2026
 
 main/
 ├── AndroidManifest.xml
@@ -8,11 +8,23 @@ main/
 │           └── doomsday
 │               ├── App.java
 │               ├── core
+│               │   ├── manager
+│               │   │   └── GoalManager.java
 │               │   ├── model
-│               │   ├── storage
-│               │   └── utils
+│               │   │   ├── Goal.java
+│               │   │   └── RenderResult.java
+│               │   ├── observer
+│               │   │   └── GoalObserver.java
+│               │   ├── renderer
+│               │   │   ├── CanvasRenderer.java
+│               │   │   └── DotRenderer.java
+│               │   ├── repository
+│               │   │   └── GoalRepository.java
+│               │   └── storage
+│               │       └── GoalStorage.java
 │               ├── theme
 │               │   └── ThemeManager.java
+│               ├── tree-str.txt
 │               ├── ui
 │               │   ├── main
 │               │   │   ├── DotPreviewView.java
@@ -44,8 +56,7 @@ main/
 │   │   ├── strings.xml
 │   │   └── themes.xml
 │   ├── values-night
-│   │   ├── colors.xml
-│   │   └── themes.xml
+│   │   └── colors.xml
 │   └── xml
 │       └── wallpaper.xml
 └── tree-str.txt
