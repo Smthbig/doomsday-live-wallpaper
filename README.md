@@ -9,6 +9,7 @@
 Premium Android live wallpaper countdown app built to visualize time, goals, and yearly progress using elegant dot-based layouts.
 
 Designed and developed by Krishna (DevKrishna) 🚀
+Maintained by Mohan Sharma 
 
 ---
 
